@@ -1,0 +1,12 @@
+{
+  "id": "traverse",
+  "name": "Traverse API",
+  "version": "0.1.0",
+  "side": "universal",
+  "initializer": "prospector.traverse.api.Traverse",
+  "description": "Loads Traverse API biome packs to expand your world's geography.",
+  "mixins": {
+    "client": "traverse.client.json",
+    "common": "traverse.common.json"
+  }
+}

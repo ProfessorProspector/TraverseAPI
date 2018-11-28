@@ -1,0 +1,74 @@
+buildscript {
+	repositories {
+		jcenter()
+		maven {
+			name = 'Fabric'
+			url = 'http://maven.modmuss50.me/'
+		}
+	}
+	dependencies {
+		classpath "net.fabricmc:fabric-loom:0.0.13-SNAPSHOT"
+	}
+}
+
+plugins {
+	id 'java'
+	id 'eclipse'
+	id 'idea'
+}
+
+apply plugin: net.fabricmc.loom.LoomGradlePlugin
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+group = "prospector.traverse.api"
+archivesBaseName = "TraverseAPI"
+version = "0.1.0"
+
+minecraft {
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:18w47b"
+	mappings "net.fabricmc:pomf:18w47b.4"
+	modCompile "net.fabricmc:fabric-loader:18w44a-0.1.0.45"
+	modCompile "net.fabricmc:fabric:0.0.3-SNAPSHOT"
+}
+
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			//This is used when the build is done on a slave node
+			if (project.hasProperty('mavenPass')) {
+				println 'Uploading to remote Maven Repo'
+				repository(url: "http://mavenupload.modmuss50.me/") {
+					authentication(userName: "buildslave", password: project.getProperty('mavenPass'))
+				}
+			} else {
+				//this is when the build is executed on the master node
+				println 'Uploading to local Maven Repo'
+				repository(url: "file:///var/www/maven/")
+			}
+			pom {
+				groupId = project.group
+				version = project.version
+				artifactId = project.archivesBaseName
+				project {
+					name project.archivesBaseName
+					packaging 'jar'
+					description project.archivesBaseName
+					url 'https://github.com/ProfessorProspector/TraverseAPI'
+					scm {
+						url 'https://github.com/ProfessorProspector/TraverseAPI'
+						connection 'scm:git:git@github.com:ProfessorProspector/TraverseAPI.git'
+						developerConnection 'scm:git:git@github.com:ProfessorProspector/TraverseAPI.git'
+					}
+				}
+			}
+		}
+	}
+}
