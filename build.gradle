@@ -1,3 +1,5 @@
+import net.fabricmc.loom.LoomGradlePlugin
+
 buildscript {
 	repositories {
 		jcenter()
@@ -17,7 +19,7 @@ plugins {
 	id 'idea'
 }
 
-apply plugin: net.fabricmc.loom.LoomGradlePlugin
+apply plugin: LoomGradlePlugin
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
 
@@ -37,6 +39,7 @@ dependencies {
 	mappings "net.fabricmc:pomf:18w47b.9"
 	modCompile "net.fabricmc:fabric-loader:18w44a-0.1.0.45"
 	modCompile "net.fabricmc:fabric:0.0.3-SNAPSHOT"
+	modCompile "prospector.silk:SilkAPI:+"
 }
 
 uploadArchives {
