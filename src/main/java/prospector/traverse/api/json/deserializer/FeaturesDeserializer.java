@@ -5,6 +5,7 @@ import com.mojang.datafixers.Dynamic;
 import com.mojang.datafixers.types.JsonOps;
 import net.minecraft.world.gen.GenerationSteps;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
+import prospector.traverse.api.json.BiomePackLoader;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class FeaturesDeserializer implements JsonDeserializer<EnumMap<GenerationSteps.FeatureStep, List<ConfiguredFeature>>> {
 	@Override
-	public EnumMap<GenerationSteps.FeatureStep, List<ConfiguredFeature>> deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+	public EnumMap<GenerationSteps.FeatureStep, List<ConfiguredFeature>> deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext) {
 		EnumMap<GenerationSteps.FeatureStep, List<ConfiguredFeature>> features = new EnumMap<>(GenerationSteps.FeatureStep.class);
 		for (GenerationSteps.FeatureStep step : GenerationSteps.FeatureStep.values()) {
 			List<ConfiguredFeature> featuresForStep = new ArrayList<>();
@@ -26,7 +27,7 @@ public class FeaturesDeserializer implements JsonDeserializer<EnumMap<Generation
 						Dynamic<?> dynamic = new Dynamic<>(JsonOps.INSTANCE, currentStep.get(i).getAsJsonObject());
 						featuresForStep.add(ConfiguredFeature.deserialize(dynamic));
 					} catch (Exception e) {
-						throw new JsonParseException("Feature " + i + " in step " + step.getName() + " could not be deserialized", e);
+						BiomePackLoader.catchException("Feature of index [" + i + "] in step " + step.getName() + " could not be deserialized. (remember, 0 is included in index)", e);
 					}
 				}
 				features.put(step, featuresForStep);

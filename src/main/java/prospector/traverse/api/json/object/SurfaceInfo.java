@@ -15,10 +15,16 @@ public class SurfaceInfo {
 	TernarySurfaceConfig config;
 
 	public SurfaceBuilder getSurfaceBuilder() {
+		if (surfaceBuilder == null) {
+			return SurfaceBuilder.DEFAULT;
+		}
 		return Registry.SURFACE_BUILDERS.get(new Identifier(this.surfaceBuilder));
 	}
 
 	public TernarySurfaceConfig getConfig() {
+		if (config == null) {
+			return SurfaceBuilder.GRASS_CONFIG;
+		}
 		return config;
 	}
 }

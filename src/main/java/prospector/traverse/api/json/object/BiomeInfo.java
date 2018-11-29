@@ -7,9 +7,9 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationSteps;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import prospector.traverse.api.Traverse;
+import prospector.traverse.api.json.BiomePackLoader;
 import prospector.traverse.api.json.deserializer.EntitySpawnsDeserializer;
 import prospector.traverse.api.json.deserializer.FeaturesDeserializer;
-import prospector.traverse.api.util.NumberUtil;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -62,23 +62,33 @@ public class BiomeInfo {
 	}
 
 	public Biome.Precipitation getPrecipitation() {
+		if (precipitation == null) {
+			Biome.Category category = getCategory();
+			if (category == Biome.Category.DESERT || category == Biome.Category.NETHER || category == Biome.Category.THE_END) {
+				return Biome.Precipitation.NONE;
+			} else if (category == Biome.Category.ICY) {
+				return Biome.Precipitation.SNOW;
+			} else {
+				return Biome.Precipitation.RAIN;
+			}
+		}
 		return Traverse.PRECIPITATION_NAME_MAP.get(precipitation);
 	}
 
 	public Integer getGrassColor() {
-		return NumberUtil.parseHexString(grassColor);
+		return BiomePackLoader.parseHexString(grassColor);
 	}
 
 	public Integer getFoliageColor() {
-		return NumberUtil.parseHexString(foliageColor);
+		return BiomePackLoader.parseHexString(foliageColor);
 	}
 
 	public int getWaterColor() {
-		return NumberUtil.parseHexString(waterColor);
+		return BiomePackLoader.parseHexString(waterColor);
 	}
 
 	public int getWaterFogColor() {
-		return NumberUtil.parseHexString(waterFogColor);
+		return BiomePackLoader.parseHexString(waterFogColor);
 	}
 
 	public SurfaceInfo getSurface() {
