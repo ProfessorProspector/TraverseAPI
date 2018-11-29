@@ -3,7 +3,7 @@ package prospector.traverse.api.json.deserializer;
 import com.google.gson.*;
 import com.mojang.datafixers.Dynamic;
 import com.mojang.datafixers.types.JsonOps;
-import net.minecraft.world.gen.GenerationSteps;
+import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import prospector.traverse.api.json.BiomePackLoader;
 
@@ -13,11 +13,11 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 
-public class FeaturesDeserializer implements JsonDeserializer<EnumMap<GenerationSteps.FeatureStep, List<ConfiguredFeature>>> {
+public class FeaturesDeserializer implements JsonDeserializer<EnumMap<GenerationStep.Feature, List<ConfiguredFeature>>> {
 	@Override
-	public EnumMap<GenerationSteps.FeatureStep, List<ConfiguredFeature>> deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext) {
-		EnumMap<GenerationSteps.FeatureStep, List<ConfiguredFeature>> features = new EnumMap<>(GenerationSteps.FeatureStep.class);
-		for (GenerationSteps.FeatureStep step : GenerationSteps.FeatureStep.values()) {
+	public EnumMap<GenerationStep.Feature, List<ConfiguredFeature>> deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext) {
+		EnumMap<GenerationStep.Feature, List<ConfiguredFeature>> features = new EnumMap<>(GenerationStep.Feature.class);
+		for (GenerationStep.Feature step : GenerationStep.Feature.values()) {
 			List<ConfiguredFeature> featuresForStep = new ArrayList<>();
 			JsonObject root = json.getAsJsonObject();
 			if (root.has(step.getName())) {

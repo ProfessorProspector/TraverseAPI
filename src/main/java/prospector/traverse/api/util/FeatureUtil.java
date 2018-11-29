@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import com.mojang.datafixers.Dynamic;
 import com.mojang.datafixers.types.JsonOps;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.GenerationSteps;
+import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public class FeatureUtil {
 		}
 		JsonObject features = new JsonObject();
 		json.add("features", features);
-		for (GenerationSteps.FeatureStep step : GenerationSteps.FeatureStep.values()) {
+		for (GenerationStep.Feature step : GenerationStep.Feature.values()) {
 			JsonArray currentStep = new JsonArray();
 			List<ConfiguredFeature<?>> featuresForStep = biome.getFeaturesForStep(step);
 			if (!featuresForStep.isEmpty()) {

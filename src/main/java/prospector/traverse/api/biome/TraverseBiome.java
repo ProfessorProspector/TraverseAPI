@@ -3,7 +3,7 @@ package prospector.traverse.api.biome;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.GenerationSteps;
+import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import prospector.traverse.api.json.object.BiomeInfo;
 
@@ -14,8 +14,8 @@ import java.util.OptionalInt;
 public class TraverseBiome extends Biome {
 	public final OptionalInt grassColor;
 	public final OptionalInt foliageColor;
-	public final EnumMap<GenerationSteps.FeatureStep, List<ConfiguredFeature>> features;
-	public final EnumMap<EntityCategory, List<Biome.SpawnListEntry>> entitySpawns;
+	public final EnumMap<GenerationStep.Feature, List<ConfiguredFeature>> features;
+	public final EnumMap<EntityCategory, List<Biome.SpawnEntry>> entitySpawns;
 
 	public TraverseBiome(BiomeInfo biomeInfo) {
 		super(new Builder().category(biomeInfo.getCategory()).parent(biomeInfo.getParent()).depth(biomeInfo.getDepth()).scale(biomeInfo.getScale()).temperature(biomeInfo.getTemperature()).downfall(biomeInfo.getDownfall()).precipitation(biomeInfo.getPrecipitation()).waterColor(biomeInfo.getWaterColor()).waterFogColor(biomeInfo.getWaterFogColor()).configureSurfaceBuilder(biomeInfo.getSurface().getSurfaceBuilder(), biomeInfo.getSurface().getConfig()));
@@ -24,7 +24,7 @@ public class TraverseBiome extends Biome {
 		this.features = biomeInfo.getFeatures();
 		this.entitySpawns = biomeInfo.getEntitySpawns();
 		if (features != null) {
-			for (GenerationSteps.FeatureStep step : features.keySet()) {
+			for (GenerationStep.Feature step : features.keySet()) {
 				List<ConfiguredFeature> featureList = features.get(step);
 				for (ConfiguredFeature feature : featureList) {
 					this.addFeature(step, feature);
@@ -33,9 +33,9 @@ public class TraverseBiome extends Biome {
 		}
 		if (entitySpawns != null) {
 			for (EntityCategory entityCategory : entitySpawns.keySet()) {
-				List<SpawnListEntry> entries = entitySpawns.get(entityCategory);
-				for (SpawnListEntry entry : entries) {
-					addEntitySpawnEntry(entityCategory, entry);
+				List<SpawnEntry> entries = entitySpawns.get(entityCategory);
+				for (SpawnEntry entry : entries) {
+					addSpawn(entityCategory, entry);
 				}
 			}
 		}

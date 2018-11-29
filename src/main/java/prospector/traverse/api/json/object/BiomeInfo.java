@@ -4,7 +4,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.GenerationSteps;
+import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import prospector.traverse.api.Traverse;
 import prospector.traverse.api.json.BiomePackLoader;
@@ -32,10 +32,10 @@ public class BiomeInfo {
 	String waterFogColor = "#050533";
 	SurfaceInfo surface;
 	@JsonAdapter(FeaturesDeserializer.class)
-	EnumMap<GenerationSteps.FeatureStep, List<ConfiguredFeature>> features;
+	EnumMap<GenerationStep.Feature, List<ConfiguredFeature>> features;
 	@SerializedName("entity_spawns")
 	@JsonAdapter(EntitySpawnsDeserializer.class)
-	EnumMap<EntityCategory, List<Biome.SpawnListEntry>> entitySpawns;
+	EnumMap<EntityCategory, List<Biome.SpawnEntry>> entitySpawns;
 
 	public Biome.Category getCategory() {
 		return Traverse.CATEGORY_NAME_MAP.get(category);
@@ -98,11 +98,11 @@ public class BiomeInfo {
 		return surface;
 	}
 
-	public EnumMap<GenerationSteps.FeatureStep, List<ConfiguredFeature>> getFeatures() {
+	public EnumMap<GenerationStep.Feature, List<ConfiguredFeature>> getFeatures() {
 		return features;
 	}
 
-	public EnumMap<EntityCategory, List<Biome.SpawnListEntry>> getEntitySpawns() {
+	public EnumMap<EntityCategory, List<Biome.SpawnEntry>> getEntitySpawns() {
 		return entitySpawns;
 	}
 }

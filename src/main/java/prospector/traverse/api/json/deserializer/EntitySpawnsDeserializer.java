@@ -15,13 +15,13 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 
-public class EntitySpawnsDeserializer implements JsonDeserializer<EnumMap<EntityCategory, List<Biome.SpawnListEntry>>> {
+public class EntitySpawnsDeserializer implements JsonDeserializer<EnumMap<EntityCategory, List<Biome.SpawnEntry>>> {
 	@Override
-	public EnumMap<EntityCategory, List<Biome.SpawnListEntry>> deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext) {
-		EnumMap<EntityCategory, List<Biome.SpawnListEntry>> entitySpawns = new EnumMap<>(EntityCategory.class);
+	public EnumMap<EntityCategory, List<Biome.SpawnEntry>> deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext) {
+		EnumMap<EntityCategory, List<Biome.SpawnEntry>> entitySpawns = new EnumMap<>(EntityCategory.class);
 		JsonObject root = json.getAsJsonObject();
 		for (EntityCategory category : EntityCategory.values()) {
-			List<Biome.SpawnListEntry> entriesForCategory = new ArrayList<>();
+			List<Biome.SpawnEntry> entriesForCategory = new ArrayList<>();
 			if (root.has(category.getName())) {
 				JsonArray currentCategory = root.get(category.getName()).getAsJsonArray();
 				for (int i = 0; i < currentCategory.size(); i++) {
@@ -31,7 +31,7 @@ public class EntitySpawnsDeserializer implements JsonDeserializer<EnumMap<Entity
 					EntityType entity = Registry.ENTITY_TYPES.get(entityName);
 					BiomePackLoader.throwCatchIf(entity != null, "Entity cannot be found " + entityName);
 					BiomePackLoader.throwCatchIf(MobEntity.class.isAssignableFrom(entity.getEntityClass()), entityName + " is not a MobEntity");
-					entriesForCategory.add(new Biome.SpawnListEntry(entity, entry.get("weight").getAsInt(), entry.get("min_group_size").getAsInt(), entry.get("max_group_size").getAsInt()));
+					entriesForCategory.add(new Biome.SpawnEntry(entity, entry.get("weight").getAsInt(), entry.get("min_group_size").getAsInt(), entry.get("max_group_size").getAsInt()));
 				}
 				entitySpawns.put(category, entriesForCategory);
 			} else {
