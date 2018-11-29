@@ -98,7 +98,7 @@ public abstract class OLDTRAVERSEBIOME extends Biome {
 	                                                  int waterColor,
 	                                                  int waterFogColor,
 	                                                  String parent) {
-		this((new Biome.Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(surfaceBuilder, surfaceConfig)).precipation(precipitation).category(category).depth(depth).scale(scale).temperature(temperature).downfall(downfall).waterColor(waterColor).waterFogColor(waterFogColor).parent(parent));
+		this((new Biome.Builder()).surfaceBuilder(new ConfiguredSurfaceBuilder<>(surfaceBuilder, surfaceConfig)).precipitation(precipitation).category(category).depth(depth).scale(scale).temperature(temperature).downfall(downfall).waterColor(waterColor).waterFogColor(waterFogColor).parent(parent));
 	}
 
 	public OLDTRAVERSEBIOME(SurfaceBuilder surfaceBuilder,
