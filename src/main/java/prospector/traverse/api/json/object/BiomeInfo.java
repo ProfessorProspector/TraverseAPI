@@ -92,6 +92,9 @@ public class BiomeInfo {
 	}
 
 	public SurfaceInfo getSurface() {
+		if (surface == null) {
+			return new SurfaceInfo();
+		}
 		return surface;
 	}
 

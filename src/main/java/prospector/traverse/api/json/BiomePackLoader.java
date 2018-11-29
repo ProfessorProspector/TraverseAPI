@@ -25,27 +25,6 @@ public class BiomePackLoader {
 	public static String currentPack = "";
 	public static String currentBiome = "";
 
-	public static Integer parseHexString(String string) {
-		String originalString = string;
-		if (string == null || string.isEmpty()) {
-			return null;
-		}
-		if (string.contains("#")) {
-			String[] splitString = string.split("#");
-			if (splitString.length != 2) {
-				throw new InvalidParameterException(string + " contains multiple # and is an invalid hex string");
-			}
-			string = splitString[1];
-		}
-		Integer integer = null;
-		try {
-			integer = Integer.parseInt(string, 16);
-		} catch (NumberFormatException e) {
-			catchException("Cannot parse as hex: " + originalString, e);
-		}
-		return integer;
-	}
-
 	public void loadBiomePacks() {
 		for (String biomePack : Traverse.BIOME_PACKS) {
 			loadBiomePack(biomePack);
@@ -121,5 +100,26 @@ public class BiomePackLoader {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public static Integer parseHexString(String string) {
+		String originalString = string;
+		if (string == null || string.isEmpty()) {
+			return null;
+		}
+		if (string.contains("#")) {
+			String[] splitString = string.split("#");
+			if (splitString.length != 2) {
+				throw new InvalidParameterException(string + " contains multiple # and is an invalid hex string");
+			}
+			string = splitString[1];
+		}
+		Integer integer = null;
+		try {
+			integer = Integer.parseInt(string, 16);
+		} catch (NumberFormatException e) {
+			catchException("Cannot parse as hex: " + originalString, e);
+		}
+		return integer;
 	}
 }
