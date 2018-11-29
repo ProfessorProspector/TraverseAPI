@@ -26,7 +26,7 @@ public class BiomePackLoader {
 	public static String currentBiome = "";
 
 	public void loadBiomePacks() {
-		for (String biomePack : Traverse.BIOME_PACKS) {
+		for (String biomePack : Traverse.BIOME_PACKS.keySet()) {
 			loadBiomePack(biomePack);
 		}
 	}
