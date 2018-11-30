@@ -104,18 +104,18 @@ public class BiomePackLoader {
 
 	public static Integer parseHexString(String string) {
 		String originalString = string;
-		if (string == null || string.isEmpty()) {
-			return null;
-		}
-		if (string.contains("#")) {
-			String[] splitString = string.split("#");
-			if (splitString.length != 2) {
-				throw new InvalidParameterException(string + " contains multiple # and is an invalid hex string");
-			}
-			string = splitString[1];
-		}
 		Integer integer = null;
 		try {
+			if (string == null || string.isEmpty()) {
+				return null;
+			}
+			if (string.contains("#")) {
+				String[] splitString = string.split("#");
+				if (splitString.length != 2) {
+					throw new InvalidParameterException(string + " contains multiple # and is an invalid hex string");
+				}
+				string = splitString[1];
+			}
 			integer = Integer.parseInt(string, 16);
 		} catch (NumberFormatException e) {
 			catchException("Cannot parse as hex: " + originalString, e);
