@@ -1,6 +1,6 @@
 package prospector.traverse.api.mixin;
 
-import net.minecraft.client.MinecraftGame;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.Feature;
@@ -14,8 +14,8 @@ import prospector.traverse.api.json.BiomePackLoader;
 import java.util.HashMap;
 import java.util.Map;
 
-@Mixin(MinecraftGame.class)
-public abstract class MinecraftGameMixin {
+@Mixin(MinecraftClient.class)
+public abstract class MinecraftClientMixin {
 	@Inject(at = @At("RETURN"), method = "init()V")
 	public void afterInit(CallbackInfo info) {
 	}
