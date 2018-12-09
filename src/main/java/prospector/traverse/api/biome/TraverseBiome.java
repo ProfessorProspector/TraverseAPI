@@ -18,7 +18,7 @@ public class TraverseBiome extends Biome {
 	public final EnumMap<EntityCategory, List<Biome.SpawnEntry>> entitySpawns;
 
 	public TraverseBiome(BiomeInfo biomeInfo) {
-		super(new Builder().category(biomeInfo.getCategory()).parent(biomeInfo.getParent()).depth(biomeInfo.getDepth()).scale(biomeInfo.getScale()).temperature(biomeInfo.getTemperature()).downfall(biomeInfo.getDownfall()).precipitation(biomeInfo.getPrecipitation()).waterColor(biomeInfo.getWaterColor()).waterFogColor(biomeInfo.getWaterFogColor()).configureSurfaceBuilder(biomeInfo.getSurface().getSurfaceBuilder(), biomeInfo.getSurface().getConfig()));
+		super(new Settings().category(biomeInfo.getCategory()).parent(biomeInfo.getParent()).depth(biomeInfo.getDepth()).scale(biomeInfo.getScale()).temperature(biomeInfo.getTemperature()).downfall(biomeInfo.getDownfall()).precipitation(biomeInfo.getPrecipitation()).waterColor(biomeInfo.getWaterColor()).waterFogColor(biomeInfo.getWaterFogColor()).configureSurfaceBuilder(biomeInfo.getSurface().getSurfaceBuilder(), biomeInfo.getSurface().getConfig()));
 		this.grassColor = biomeInfo.getGrassColor() == null ? OptionalInt.empty() : OptionalInt.of(biomeInfo.getGrassColor());
 		this.foliageColor = biomeInfo.getFoliageColor() == null ? OptionalInt.empty() : OptionalInt.of(biomeInfo.getFoliageColor());
 		this.features = biomeInfo.getFeatures();
