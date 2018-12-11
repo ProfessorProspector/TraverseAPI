@@ -1,4 +1,4 @@
-package prospector.traverse.api.json;
+package io.github.prospector.traverse.api.json;
 
 public class BiomeLoadingException extends RuntimeException {
 	public BiomeLoadingException() {

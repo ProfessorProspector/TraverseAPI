@@ -1,4 +1,4 @@
-package prospector.traverse.api.feature;
+package io.github.prospector.traverse.api.feature;
 
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;

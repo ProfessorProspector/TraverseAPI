@@ -1,4 +1,4 @@
-package prospector.traverse.api.json;
+package io.github.prospector.traverse.api.json;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -6,9 +6,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import prospector.traverse.api.Traverse;
-import prospector.traverse.api.biome.TraverseBiome;
-import prospector.traverse.api.json.object.BiomeInfo;
+import io.github.prospector.traverse.api.Traverse;
+import io.github.prospector.traverse.api.biome.TraverseBiome;
+import io.github.prospector.traverse.api.json.object.BiomeInfo;
 
 import java.io.IOException;
 import java.io.InputStream;

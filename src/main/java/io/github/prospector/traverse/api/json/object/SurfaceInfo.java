@@ -1,12 +1,12 @@
-package prospector.traverse.api.json.object;
+package io.github.prospector.traverse.api.json.object;
 
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+import io.github.prospector.traverse.api.json.deserializer.SurfaceConfigDeserializer;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.config.surfacebuilder.TernarySurfaceConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
-import prospector.traverse.api.json.deserializer.SurfaceConfigDeserializer;
 
 public class SurfaceInfo {
 	@SerializedName("surface_builder")

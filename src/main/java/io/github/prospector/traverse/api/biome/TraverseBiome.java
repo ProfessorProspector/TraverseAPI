@@ -1,11 +1,11 @@
-package prospector.traverse.api.biome;
+package io.github.prospector.traverse.api.biome;
 
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
-import prospector.traverse.api.json.object.BiomeInfo;
+import io.github.prospector.traverse.api.json.object.BiomeInfo;
 
 import java.util.EnumMap;
 import java.util.List;

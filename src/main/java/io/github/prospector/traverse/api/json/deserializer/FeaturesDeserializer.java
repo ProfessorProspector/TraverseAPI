@@ -1,11 +1,11 @@
-package prospector.traverse.api.json.deserializer;
+package io.github.prospector.traverse.api.json.deserializer;
 
 import com.google.gson.*;
 import com.mojang.datafixers.Dynamic;
 import com.mojang.datafixers.types.JsonOps;
+import io.github.prospector.traverse.api.json.BiomePackLoader;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
-import prospector.traverse.api.json.BiomePackLoader;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

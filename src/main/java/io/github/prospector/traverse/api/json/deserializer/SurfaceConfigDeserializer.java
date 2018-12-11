@@ -1,4 +1,4 @@
-package prospector.traverse.api.json.deserializer;
+package io.github.prospector.traverse.api.json.deserializer;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;

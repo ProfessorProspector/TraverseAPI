@@ -27,7 +27,7 @@ apply plugin: 'maven-publish'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-group = "prospector.traverse.api"
+group = "io.github.prospector.traverse.api"
 archivesBaseName = "TraverseAPI"
 version = "0.1.0"
 

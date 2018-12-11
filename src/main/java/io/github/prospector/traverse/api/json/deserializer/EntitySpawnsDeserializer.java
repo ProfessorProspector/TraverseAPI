@@ -1,13 +1,13 @@
-package prospector.traverse.api.json.deserializer;
+package io.github.prospector.traverse.api.json.deserializer;
 
 import com.google.gson.*;
+import io.github.prospector.traverse.api.json.BiomePackLoader;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
-import prospector.traverse.api.json.BiomePackLoader;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;

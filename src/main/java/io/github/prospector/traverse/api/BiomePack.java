@@ -1,4 +1,4 @@
-package prospector.traverse.api;
+package io.github.prospector.traverse.api;
 
 import net.minecraft.world.gen.carver.Carver;
 import net.minecraft.world.gen.decorator.Decorator;

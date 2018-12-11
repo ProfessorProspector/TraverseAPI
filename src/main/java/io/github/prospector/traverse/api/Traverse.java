@@ -1,5 +1,6 @@
-package prospector.traverse.api;
+package io.github.prospector.traverse.api;
 
+import io.github.prospector.traverse.api.json.BiomePackLoader;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.FabricLoader;
 import net.minecraft.entity.EntityCategory;
@@ -10,7 +11,6 @@ import net.minecraft.world.gen.carver.Carver;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
-import prospector.traverse.api.json.BiomePackLoader;
 
 import java.io.File;
 import java.util.Arrays;

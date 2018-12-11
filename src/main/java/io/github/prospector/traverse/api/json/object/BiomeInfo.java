@@ -1,15 +1,15 @@
-package prospector.traverse.api.json.object;
+package io.github.prospector.traverse.api.json.object;
 
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+import io.github.prospector.traverse.api.Traverse;
+import io.github.prospector.traverse.api.json.BiomePackLoader;
+import io.github.prospector.traverse.api.json.deserializer.EntitySpawnsDeserializer;
+import io.github.prospector.traverse.api.json.deserializer.FeaturesDeserializer;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
-import prospector.traverse.api.Traverse;
-import prospector.traverse.api.json.BiomePackLoader;
-import prospector.traverse.api.json.deserializer.EntitySpawnsDeserializer;
-import prospector.traverse.api.json.deserializer.FeaturesDeserializer;
 
 import java.util.EnumMap;
 import java.util.List;
