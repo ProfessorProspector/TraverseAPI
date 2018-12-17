@@ -31,14 +31,14 @@ public class Traverse implements ModInitializer {
 	}
 
 	public static void registerBiome(String modid, String name, Biome biome) {
-		Registry.register(Registry.BIOMES, new Identifier(modid, name), biome);
+		Registry.register(Registry.BIOME, new Identifier(modid, name), biome);
 		if (biome.hasParent()) {
 			Biome.PARENT_BIOME_ID_MAP.add(biome);
 		}
 	}
 
 	public static <F extends Feature> F registerFeature(String modid, String name, F feature) {
-		Registry.register(Registry.FEATURES, new Identifier(modid, name), (Feature<?>) feature);
+		Registry.register(Registry.FEATURE, new Identifier(modid, name), (Feature<?>) feature);
 		return feature;
 	}
 
@@ -52,22 +52,22 @@ public class Traverse implements ModInitializer {
 			{
 				Map<String, Feature<?>> map = new HashMap<>();
 				Traverse.BIOME_PACKS.get(id).addFeatures(map);
-				map.keySet().forEach(s -> Registry.register(Registry.FEATURES, new Identifier(id, s), map.get(s)));
+				map.keySet().forEach(s -> Registry.register(Registry.FEATURE, new Identifier(id, s), map.get(s)));
 			}
 			{
 				Map<String, Carver<?>> map = new HashMap<>();
 				Traverse.BIOME_PACKS.get(id).addCarvers(map);
-				map.keySet().forEach(s -> Registry.register(Registry.CARVERS, new Identifier(id, s), map.get(s)));
+				map.keySet().forEach(s -> Registry.register(Registry.CARVER, new Identifier(id, s), map.get(s)));
 			}
 			{
 				Map<String, Decorator<?>> map = new HashMap<>();
 				Traverse.BIOME_PACKS.get(id).addDecorators(map);
-				map.keySet().forEach(s -> Registry.register(Registry.DECORATORS, new Identifier(id, s), map.get(s)));
+				map.keySet().forEach(s -> Registry.register(Registry.DECORATOR, new Identifier(id, s), map.get(s)));
 			}
 			{
 				Map<String, SurfaceBuilder<?>> map = new HashMap<>();
 				Traverse.BIOME_PACKS.get(id).addSurfaceBuilders(map);
-				map.keySet().forEach(s -> Registry.register(Registry.SURFACE_BUILDERS, new Identifier(id, s), map.get(s)));
+				map.keySet().forEach(s -> Registry.register(Registry.SURFACE_BUILDER, new Identifier(id, s), map.get(s)));
 			}
 		}
 		new BiomePackLoader().loadBiomePacks();

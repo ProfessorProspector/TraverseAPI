@@ -28,7 +28,7 @@ public class EntitySpawnsDeserializer implements JsonDeserializer<EnumMap<Entity
 					JsonObject entry = currentCategory.get(i).getAsJsonObject();
 					//noinspection unchecked
 					Identifier entityName = new Identifier(entry.get("type").getAsString());
-					EntityType entity = Registry.ENTITY_TYPES.get(entityName);
+					EntityType entity = Registry.ENTITY_TYPE.get(entityName);
 					BiomePackLoader.throwCatchIf(entity != null, "Entity cannot be found " + entityName);
 					BiomePackLoader.throwCatchIf(MobEntity.class.isAssignableFrom(entity.getEntityClass()), entityName + " is not a MobEntity");
 					entriesForCategory.add(new Biome.SpawnEntry(entity, entry.get("weight").getAsInt(), entry.get("min_group_size").getAsInt(), entry.get("max_group_size").getAsInt()));

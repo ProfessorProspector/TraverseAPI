@@ -18,7 +18,7 @@ public class SurfaceInfo {
 		if (surfaceBuilder == null) {
 			return SurfaceBuilder.DEFAULT;
 		}
-		return Registry.SURFACE_BUILDERS.get(new Identifier(this.surfaceBuilder));
+		return Registry.SURFACE_BUILDER.get(new Identifier(this.surfaceBuilder));
 	}
 
 	public TernarySurfaceConfig getConfig() {
