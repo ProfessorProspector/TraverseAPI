@@ -5,7 +5,7 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.mojang.datafixers.Dynamic;
 import com.mojang.datafixers.types.JsonOps;
-import net.minecraft.world.gen.config.surfacebuilder.TernarySurfaceConfig;
+import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 
 import java.lang.reflect.Type;
 

@@ -5,8 +5,8 @@ import com.google.gson.annotations.SerializedName;
 import io.github.prospector.traverse.api.json.deserializer.SurfaceConfigDeserializer;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.config.surfacebuilder.TernarySurfaceConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 
 public class SurfaceInfo {
 	@SerializedName("surface_builder")

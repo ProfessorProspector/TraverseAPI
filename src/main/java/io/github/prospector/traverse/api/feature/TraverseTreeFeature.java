@@ -2,7 +2,7 @@ package io.github.prospector.traverse.api.feature;
 
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
-import net.minecraft.world.gen.config.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.OakTreeFeature;
 
 import java.util.function.Function;
