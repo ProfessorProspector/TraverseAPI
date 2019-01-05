@@ -1,7 +1,7 @@
 {
   "id": "traverse",
   "name": "Traverse API",
-  "version": "0.1.0",
+  "version": "$version",
   "side": "universal",
   "initializer": "io.github.prospector.traverse.api.Traverse",
   "description": "Loads Traverse API biome packs to expand your world's geography.",
