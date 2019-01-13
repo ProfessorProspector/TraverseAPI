@@ -4,6 +4,10 @@
   "version": "$version",
   "side": "universal",
   "initializer": "io.github.prospector.traverse.api.Traverse",
+  "requires": {
+	"fabric": "*",
+	"silk": "*"
+  },
   "description": "Loads Traverse API biome packs to expand your world's geography.",
   "mixins": { }
 }
