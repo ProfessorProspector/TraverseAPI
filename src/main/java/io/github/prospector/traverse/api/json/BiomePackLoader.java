@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import io.github.prospector.traverse.api.Traverse;
+import io.github.prospector.traverse.api.TraverseAPI;
 import io.github.prospector.traverse.api.biome.TraverseBiome;
 import io.github.prospector.traverse.api.json.object.BiomeInfo;
 
@@ -26,7 +26,7 @@ public class BiomePackLoader {
 	public static String currentBiome = "";
 
 	public void loadBiomePacks() {
-		for (String biomePack : Traverse.BIOME_PACKS.keySet()) {
+		for (String biomePack : TraverseAPI.BIOME_PACKS.keySet()) {
 			loadBiomePack(biomePack);
 		}
 	}
@@ -54,7 +54,7 @@ public class BiomePackLoader {
 				catchException("Failed to load biome info", e);
 				continue;
 			}
-			Traverse.registerBiome(biomepack, biome, new TraverseBiome(biomeInfo));
+			TraverseAPI.registerBiome(biomepack, biome, new TraverseBiome(biomeInfo));
 			currentBiome = null;
 		}
 		if (BIOMEPACK_EXCEPTIONS.get(biomepack)) {

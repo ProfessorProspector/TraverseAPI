@@ -4,7 +4,6 @@ import com.google.gson.*;
 import io.github.prospector.traverse.api.json.BiomePackLoader;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
@@ -30,7 +29,8 @@ public class EntitySpawnsDeserializer implements JsonDeserializer<EnumMap<Entity
 					Identifier entityName = new Identifier(entry.get("type").getAsString());
 					EntityType entity = Registry.ENTITY_TYPE.get(entityName);
 					BiomePackLoader.throwCatchIf(entity != null, "Entity cannot be found " + entityName);
-					BiomePackLoader.throwCatchIf(MobEntity.class.isAssignableFrom(entity.getEntityClass()), entityName + " is not a MobEntity");
+					// Welp this is impossible now
+					// BiomePackLoader.throwCatchIf(MobEntity.class.isAssignableFrom(entity.getEntityClass()), entityName + " is not a MobEntity");
 					entriesForCategory.add(new Biome.SpawnEntry(entity, entry.get("weight").getAsInt(), entry.get("min_group_size").getAsInt(), entry.get("max_group_size").getAsInt()));
 				}
 				entitySpawns.put(category, entriesForCategory);

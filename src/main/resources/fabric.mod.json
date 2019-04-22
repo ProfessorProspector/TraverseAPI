@@ -1,13 +1,30 @@
 {
+  "schemaVersion": 1,
   "id": "traverse",
   "name": "Traverse API",
   "version": "$version",
-  "side": "universal",
-  "initializer": "io.github.prospector.traverse.api.Traverse",
-  "requires": {
-	"fabric": "*",
-	"silk": "*"
+  "environment": "*",
+  "license": "MIT",
+  "icon": "assets/traverse/icon.png",
+  "entrypoints": {
+	"main": [
+	  "io.github.prospector.traverse.api.TraverseAPI"
+	]
   },
+  "contact": {
+	"homepage": "https://minecraft.curseforge.com/projects/traverseapi",
+	"issues": "https://github.com/Prospector/TraverseAPI/issues"
+  },
+  "requires": {
+	"fabric": "*"
+  },
+  "authors": [
+	"God Himself"
+  ],
+  "contributors": [
+  ],
   "description": "Loads Traverse API biome packs to expand your world's geography.",
-  "mixins": { }
+  "mixins": [
+	"mixins.traverse.json"
+  ]
 }

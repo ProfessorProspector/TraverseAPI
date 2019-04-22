@@ -2,7 +2,7 @@ package io.github.prospector.traverse.api.json.object;
 
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
-import io.github.prospector.traverse.api.Traverse;
+import io.github.prospector.traverse.api.TraverseAPI;
 import io.github.prospector.traverse.api.json.BiomePackLoader;
 import io.github.prospector.traverse.api.json.deserializer.EntitySpawnsDeserializer;
 import io.github.prospector.traverse.api.json.deserializer.FeaturesDeserializer;
@@ -38,7 +38,7 @@ public class BiomeInfo {
 	EnumMap<EntityCategory, List<Biome.SpawnEntry>> entitySpawns;
 
 	public Biome.Category getCategory() {
-		return Traverse.CATEGORY_NAME_MAP.get(category);
+		return TraverseAPI.CATEGORY_NAME_MAP.get(category);
 	}
 
 	public String getParent() {
@@ -72,7 +72,7 @@ public class BiomeInfo {
 				return Biome.Precipitation.RAIN;
 			}
 		}
-		return Traverse.PRECIPITATION_NAME_MAP.get(precipitation);
+		return TraverseAPI.PRECIPITATION_NAME_MAP.get(precipitation);
 	}
 
 	public Integer getGrassColor() {
