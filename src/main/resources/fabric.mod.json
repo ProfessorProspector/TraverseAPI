@@ -8,7 +8,8 @@
   "icon": "assets/traverse/icon.png",
   "entrypoints": {
 	"main": [
-	  "io.github.prospector.traverse.api.TraverseAPI"
+	  "io.github.prospector.traverse.api.TraverseApi",
+	  "io.github.prospector.traverse.loader.TraverseLoader"
 	]
   },
   "contact": {

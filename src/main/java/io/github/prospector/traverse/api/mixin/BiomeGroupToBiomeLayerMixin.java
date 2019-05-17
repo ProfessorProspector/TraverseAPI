@@ -2,8 +2,8 @@ package io.github.prospector.traverse.api.mixin;
 
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.biome.layer.BiomeGroupToBiomeLayer;
 import net.minecraft.world.biome.layer.LayerRandomnessSource;
+import net.minecraft.world.biome.layer.SetBaseBiomesLayer;
 import org.apache.commons.lang3.ArrayUtils;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -13,18 +13,18 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(BiomeGroupToBiomeLayer.class)
+@Mixin(SetBaseBiomesLayer.class)
 public class BiomeGroupToBiomeLayerMixin {
 
 	@Shadow
 	@Final
 	@Mutable
-	private static int[] GROUP_2;
+	private static int[] TEMPERATE_BIOMES;
 
 	@Shadow
 	@Final
 	@Mutable
-	private static int[] GROUP_3;
+	private static int[] COOL_BIOMES;
 
 	@Shadow
 	@Final
@@ -45,8 +45,8 @@ public class BiomeGroupToBiomeLayerMixin {
 	}
 
 	static {
-		GROUP_2 = ArrayUtils.addAll(GROUP_2, AUTUMNAL_WOODS_ID);
-		GROUP_3 = ArrayUtils.addAll(GROUP_3, WOODLANDS_WOODS_ID, MEADOW_ID);
+		TEMPERATE_BIOMES = ArrayUtils.addAll(TEMPERATE_BIOMES, AUTUMNAL_WOODS_ID);
+		COOL_BIOMES = ArrayUtils.addAll(COOL_BIOMES, WOODLANDS_WOODS_ID, MEADOW_ID);
 	}
 
 }

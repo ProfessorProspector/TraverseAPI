@@ -1,9 +1,9 @@
-package io.github.prospector.traverse.api.json.deserializer;
+package io.github.prospector.traverse.loader.json.deserializer;
 
 import com.google.gson.*;
 import com.mojang.datafixers.Dynamic;
 import com.mojang.datafixers.types.JsonOps;
-import io.github.prospector.traverse.api.json.BiomePackLoader;
+import io.github.prospector.traverse.loader.json.BiomePackLoader;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 
@@ -27,7 +27,7 @@ public class FeaturesDeserializer implements JsonDeserializer<EnumMap<Generation
 						Dynamic<?> dynamic = new Dynamic<>(JsonOps.INSTANCE, currentStep.get(i).getAsJsonObject());
 						featuresForStep.add(ConfiguredFeature.deserialize(dynamic));
 					} catch (Exception e) {
-						BiomePackLoader.catchException("Feature of index [" + i + "] in step " + step.getName() + " could not be deserialized. (remember, 0 is included in index)", e);
+						BiomePackLoader.printException("Feature of index [" + i + "] in step " + step.getName() + " could not be deserialized. (remember, 0 is included in index)", e);
 					}
 				}
 				features.put(step, featuresForStep);

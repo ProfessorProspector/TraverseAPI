@@ -4,13 +4,12 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
+import net.minecraft.ChatFormat;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.network.chat.*;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.*;
-import net.minecraft.text.event.ClickEvent;
-import net.minecraft.text.event.HoverEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.Registry;
@@ -18,7 +17,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
 public class FindBiomeCommand {
-	private static final SimpleCommandExceptionType FAILED_EXCEPTION = new SimpleCommandExceptionType(new TranslatableTextComponent("commands.findbiome.failed"));
+	private static final SimpleCommandExceptionType FAILED_EXCEPTION = new SimpleCommandExceptionType(new TranslatableComponent("commands.findbiome.failed"));
 
 	public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
 		LiteralArgumentBuilder<ServerCommandSource> builder = CommandManager.literal("findbiome").requires((serverCommandSource_1) -> serverCommandSource_1.hasPermissionLevel(2));
@@ -34,7 +33,7 @@ public class FindBiomeCommand {
 				biomePos = spiralOutwardsLookingForBiome(player, source.getWorld(), biome, source.getPlayer().getPos().getX(), source.getPlayer().getPos().getZ(), 60_000);
 
 				if (biomePos == null) {
-					source.getMinecraftServer().execute(() -> player.sendChatMessage(new StringTextComponent(TextFormat.RED + "Error! Biome '" + Registry.BIOME.getId(biome) + "' could not be found after " + TextFormat.GRAY + 60_000 + "ms" + TextFormat.RED + "."), ChatMessageType.GAME_INFO));
+					source.getMinecraftServer().execute(() -> player.sendChatMessage(new TextComponent(ChatFormat.RED + "Error! Biome '" + Registry.BIOME.getId(biome) + "' could not be found after " + ChatFormat.GRAY + 60_000 + "ms" + ChatFormat.RED + "."), ChatMessageType.GAME_INFO));
 					return;
 				}
 				source.getMinecraftServer().execute(() -> {
@@ -47,12 +46,12 @@ public class FindBiomeCommand {
 						}
 					} else {
 						int distance = MathHelper.floor(getDistance(blockPos_1.getX(), blockPos_1.getZ(), biomePos.getX(), biomePos.getZ()));
-						TextComponent textComponent_1 = TextFormatter.bracketed(new TranslatableTextComponent("chat.coordinates", biomePos.getX(), "~", biomePos.getZ())).modifyStyle((style_1) -> style_1.setColor(TextFormat.GREEN).setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/tp @s " + biomePos.getX() + " ~ " + biomePos.getZ())).setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TranslatableTextComponent("chat.coordinates.tooltip"))));
-						source.sendFeedback(new TranslatableTextComponent("commands.locate.success", biome, textComponent_1, distance), false);
+						Component component = Components.bracketed(new TranslatableComponent("chat.coordinates", biomePos.getX(), "~", biomePos.getZ())).modifyStyle((style_1) -> style_1.setColor(ChatFormat.GREEN).setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/tp @s " + biomePos.getX() + " ~ " + biomePos.getZ())).setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TranslatableComponent("chat.coordinates.tooltip"))));
+						source.sendFeedback(new TranslatableComponent("commands.locate.success", biome, component, distance), false);
 					}
-					player.sendChatMessage(new StringTextComponent(TextFormat.WHITE + "Found '" + Registry.BIOME.getId(biome) + "' Biome! " + TextFormat.GRAY + "(" + (System.currentTimeMillis() - start) + "ms)"), ChatMessageType.GAME_INFO);
+					player.sendChatMessage(new TextComponent(ChatFormat.WHITE + "Found '" + Registry.BIOME.getId(biome) + "' Biome! " + ChatFormat.GRAY + "(" + (System.currentTimeMillis() - start) + "ms)"), ChatMessageType.GAME_INFO);
 				});
-				source.getMinecraftServer().execute(() -> player.sendChatMessage(new StringTextComponent(TextFormat.RED + "Error! An unknown error occurred."), ChatMessageType.GAME_INFO));
+				source.getMinecraftServer().execute(() -> player.sendChatMessage(new TextComponent(ChatFormat.RED + "Error! An unknown error occurred."), ChatMessageType.GAME_INFO));
 			} catch (CommandSyntaxException e) {
 				e.printStackTrace();
 			}
@@ -85,7 +84,7 @@ public class FindBiomeCommand {
 			if (previous == 3)
 				previous = 0;
 			String s = (previous == 0 ? "." : previous == 1 ? ".." : "...");
-			player.addChatMessage(new StringTextComponent("Scanning" + s), true);
+			player.addChatMessage(new TextComponent("Scanning" + s), true);
 			if (i == 1501) {
 				previous++;
 				i = 0;
@@ -93,7 +92,7 @@ public class FindBiomeCommand {
 			i++;
 			if (world.getBiome(pos).equals(biomeToFind)) {
 				pos.close();
-				player.addChatMessage(new StringTextComponent("Found Biome"), true);
+				player.addChatMessage(new TextComponent("Found Biome"), true);
 				return new BlockPos((int) x, 0, (int) z);
 			}
 		}

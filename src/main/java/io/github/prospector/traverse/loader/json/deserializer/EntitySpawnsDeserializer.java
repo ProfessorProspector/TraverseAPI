@@ -1,7 +1,7 @@
-package io.github.prospector.traverse.api.json.deserializer;
+package io.github.prospector.traverse.loader.json.deserializer;
 
 import com.google.gson.*;
-import io.github.prospector.traverse.api.json.BiomePackLoader;
+import io.github.prospector.traverse.loader.json.BiomePackLoader;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
@@ -25,12 +25,11 @@ public class EntitySpawnsDeserializer implements JsonDeserializer<EnumMap<Entity
 				JsonArray currentCategory = root.get(category.getName()).getAsJsonArray();
 				for (int i = 0; i < currentCategory.size(); i++) {
 					JsonObject entry = currentCategory.get(i).getAsJsonObject();
-					//noinspection unchecked
 					Identifier entityName = new Identifier(entry.get("type").getAsString());
 					EntityType entity = Registry.ENTITY_TYPE.get(entityName);
-					BiomePackLoader.throwCatchIf(entity != null, "Entity cannot be found " + entityName);
+					BiomePackLoader.checkExpression(Registry.ENTITY_TYPE.containsId(entityName), "Entity cannot be found: " + entityName);
 					// Welp this is impossible now
-					// BiomePackLoader.throwCatchIf(MobEntity.class.isAssignableFrom(entity.getEntityClass()), entityName + " is not a MobEntity");
+					// BiomePackLoader.checkExpression(MobEntity.class.isAssignableFrom(entity.getEntityClass()), entityName + " is not a MobEntity");
 					entriesForCategory.add(new Biome.SpawnEntry(entity, entry.get("weight").getAsInt(), entry.get("min_group_size").getAsInt(), entry.get("max_group_size").getAsInt()));
 				}
 				entitySpawns.put(category, entriesForCategory);

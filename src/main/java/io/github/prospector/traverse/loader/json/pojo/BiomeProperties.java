@@ -1,11 +1,10 @@
-package io.github.prospector.traverse.api.json.object;
+package io.github.prospector.traverse.loader.json.pojo;
 
 import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import io.github.prospector.traverse.api.TraverseAPI;
-import io.github.prospector.traverse.api.json.BiomePackLoader;
-import io.github.prospector.traverse.api.json.deserializer.EntitySpawnsDeserializer;
-import io.github.prospector.traverse.api.json.deserializer.FeaturesDeserializer;
+import io.github.prospector.traverse.loader.TraverseLoader;
+import io.github.prospector.traverse.loader.json.BiomePackLoader;
+import io.github.prospector.traverse.loader.json.deserializer.EntitySpawnsDeserializer;
+import io.github.prospector.traverse.loader.json.deserializer.FeaturesDeserializer;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
@@ -14,7 +13,7 @@ import net.minecraft.world.gen.feature.ConfiguredFeature;
 import java.util.EnumMap;
 import java.util.List;
 
-public class BiomeInfo {
+public class BiomeProperties {
 	String category;
 	String parent;
 	Float depth;
@@ -22,23 +21,20 @@ public class BiomeInfo {
 	Float temperature;
 	Float downfall;
 	String precipitation;
-	@SerializedName("grass_color")
 	String grassColor;
-	@SerializedName("foliage_color")
 	String foliageColor;
-	@SerializedName("water_color")
 	String waterColor = "#3F76E4";
-	@SerializedName("water_fog_color")
 	String waterFogColor = "#050533";
-	SurfaceInfo surface;
+	SurfaceProperties surface;
+	InheritedFeatures[] inheritedFeatures;
+	DefaultFeatures defaultFeatures;
 	@JsonAdapter(FeaturesDeserializer.class)
 	EnumMap<GenerationStep.Feature, List<ConfiguredFeature>> features;
-	@SerializedName("entity_spawns")
 	@JsonAdapter(EntitySpawnsDeserializer.class)
 	EnumMap<EntityCategory, List<Biome.SpawnEntry>> entitySpawns;
 
 	public Biome.Category getCategory() {
-		return TraverseAPI.CATEGORY_NAME_MAP.get(category);
+		return TraverseLoader.CATEGORY_NAME_MAP.get(category);
 	}
 
 	public String getParent() {
@@ -64,7 +60,7 @@ public class BiomeInfo {
 	public Biome.Precipitation getPrecipitation() {
 		if (precipitation == null) {
 			Biome.Category category = getCategory();
-			if (category == Biome.Category.DESERT || category == Biome.Category.NETHER || category == Biome.Category.THE_END) {
+			if (category == Biome.Category.DESERT || category == Biome.Category.NETHER || category == Biome.Category.THEEND) {
 				return Biome.Precipitation.NONE;
 			} else if (category == Biome.Category.ICY) {
 				return Biome.Precipitation.SNOW;
@@ -72,7 +68,7 @@ public class BiomeInfo {
 				return Biome.Precipitation.RAIN;
 			}
 		}
-		return TraverseAPI.PRECIPITATION_NAME_MAP.get(precipitation);
+		return TraverseLoader.PRECIPITATION_NAME_MAP.get(precipitation);
 	}
 
 	public Integer getGrassColor() {
@@ -91,11 +87,19 @@ public class BiomeInfo {
 		return BiomePackLoader.parseHexString(waterFogColor);
 	}
 
-	public SurfaceInfo getSurface() {
+	public SurfaceProperties getSurface() {
 		if (surface == null) {
-			return new SurfaceInfo();
+			return new SurfaceProperties();
 		}
 		return surface;
+	}
+
+	public InheritedFeatures[] getInheritedFeatures() {
+		return inheritedFeatures;
+	}
+
+	public DefaultFeatures getDefaultFeatures() {
+		return defaultFeatures;
 	}
 
 	public EnumMap<GenerationStep.Feature, List<ConfiguredFeature>> getFeatures() {
