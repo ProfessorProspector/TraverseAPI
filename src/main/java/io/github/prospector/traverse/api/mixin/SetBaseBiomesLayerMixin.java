@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(SetBaseBiomesLayer.class)
-public class BiomeGroupToBiomeLayerMixin {
+public class SetBaseBiomesLayerMixin {
 
 	@Shadow
 	@Final

@@ -5,6 +5,7 @@ import io.github.prospector.traverse.loader.TraverseLoader;
 import io.github.prospector.traverse.loader.json.BiomePackLoader;
 import io.github.prospector.traverse.loader.json.deserializer.EntitySpawnsDeserializer;
 import io.github.prospector.traverse.loader.json.deserializer.FeaturesDeserializer;
+import io.github.prospector.traverse.loader.json.pojo.generation.GenerationProperties;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
@@ -14,99 +15,108 @@ import java.util.EnumMap;
 import java.util.List;
 
 public class BiomeProperties {
-	String category;
-	String parent;
-	Float depth;
-	Float scale;
-	Float temperature;
-	Float downfall;
-	String precipitation;
-	String grassColor;
-	String foliageColor;
-	String waterColor = "#3F76E4";
-	String waterFogColor = "#050533";
-	SurfaceProperties surface;
-	InheritedFeatures[] inheritedFeatures;
-	DefaultFeatures defaultFeatures;
-	@JsonAdapter(FeaturesDeserializer.class)
-	EnumMap<GenerationStep.Feature, List<ConfiguredFeature>> features;
-	@JsonAdapter(EntitySpawnsDeserializer.class)
-	EnumMap<EntityCategory, List<Biome.SpawnEntry>> entitySpawns;
 
-	public Biome.Category getCategory() {
-		return TraverseLoader.CATEGORY_NAME_MAP.get(category);
-	}
+    GenerationProperties generation;
+    String category;
+    String parent;
+    Float depth;
+    Float scale;
+    Float temperature;
+    Float downfall;
+    String precipitation;
+    String grassColor;
+    String foliageColor;
+    String waterColor = "#3F76E4";
+    String waterFogColor = "#050533";
+    SurfaceProperties surface;
+    InheritedFeatures[] inheritedFeatures;
+    DefaultFeatures defaultFeatures;
+    @JsonAdapter(FeaturesDeserializer.class)
+    EnumMap<GenerationStep.Feature, List<ConfiguredFeature>> features;
+    @JsonAdapter(EntitySpawnsDeserializer.class)
+    EnumMap<EntityCategory, List<Biome.SpawnEntry>> entitySpawns;
 
-	public String getParent() {
-		return parent;
-	}
+    public Biome.Category getCategory() {
+        return TraverseLoader.CATEGORY_NAME_MAP.get(category);
+    }
 
-	public Float getDepth() {
-		return depth;
-	}
+    public String getParent() {
+        return parent;
+    }
 
-	public Float getScale() {
-		return scale;
-	}
+    public Float getDepth() {
+        return depth;
+    }
 
-	public Float getTemperature() {
-		return temperature;
-	}
+    public Float getScale() {
+        return scale;
+    }
 
-	public Float getDownfall() {
-		return downfall;
-	}
+    public Float getTemperature() {
+        return temperature;
+    }
 
-	public Biome.Precipitation getPrecipitation() {
-		if (precipitation == null) {
-			Biome.Category category = getCategory();
-			if (category == Biome.Category.DESERT || category == Biome.Category.NETHER || category == Biome.Category.THEEND) {
-				return Biome.Precipitation.NONE;
-			} else if (category == Biome.Category.ICY) {
-				return Biome.Precipitation.SNOW;
-			} else {
-				return Biome.Precipitation.RAIN;
-			}
-		}
-		return TraverseLoader.PRECIPITATION_NAME_MAP.get(precipitation);
-	}
+    public Float getDownfall() {
+        return downfall;
+    }
 
-	public Integer getGrassColor() {
-		return BiomePackLoader.parseHexString(grassColor);
-	}
+    public Biome.Precipitation getPrecipitation() {
+        if (precipitation == null) {
+            Biome.Category category = getCategory();
+            if (category == Biome.Category.DESERT || category == Biome.Category.NETHER || category == Biome.Category.THEEND) {
+                return Biome.Precipitation.NONE;
+            }
+            else if (category == Biome.Category.ICY) {
+                return Biome.Precipitation.SNOW;
+            }
+            else {
+                return Biome.Precipitation.RAIN;
+            }
+        }
+        return TraverseLoader.PRECIPITATION_NAME_MAP.get(precipitation);
+    }
 
-	public Integer getFoliageColor() {
-		return BiomePackLoader.parseHexString(foliageColor);
-	}
+    public Integer getGrassColor() {
+        return BiomePackLoader.parseHexString(grassColor);
+    }
 
-	public int getWaterColor() {
-		return BiomePackLoader.parseHexString(waterColor);
-	}
+    public Integer getFoliageColor() {
+        return BiomePackLoader.parseHexString(foliageColor);
+    }
 
-	public int getWaterFogColor() {
-		return BiomePackLoader.parseHexString(waterFogColor);
-	}
+    public int getWaterColor() {
+        return BiomePackLoader.parseHexString(waterColor);
+    }
 
-	public SurfaceProperties getSurface() {
-		if (surface == null) {
-			return new SurfaceProperties();
-		}
-		return surface;
-	}
+    public int getWaterFogColor() {
+        return BiomePackLoader.parseHexString(waterFogColor);
+    }
 
-	public InheritedFeatures[] getInheritedFeatures() {
-		return inheritedFeatures;
-	}
+    public SurfaceProperties getSurface() {
+        if (surface == null) {
+            return new SurfaceProperties();
+        }
+        return surface;
+    }
 
-	public DefaultFeatures getDefaultFeatures() {
-		return defaultFeatures;
-	}
+    public InheritedFeatures[] getInheritedFeatures() {
+        return inheritedFeatures;
+    }
 
-	public EnumMap<GenerationStep.Feature, List<ConfiguredFeature>> getFeatures() {
-		return features;
-	}
+    public DefaultFeatures getDefaultFeatures() {
+        return defaultFeatures;
+    }
 
-	public EnumMap<EntityCategory, List<Biome.SpawnEntry>> getEntitySpawns() {
-		return entitySpawns;
-	}
+    public EnumMap<GenerationStep.Feature, List<ConfiguredFeature>> getFeatures() {
+        return features;
+    }
+
+    public EnumMap<EntityCategory, List<Biome.SpawnEntry>> getEntitySpawns() {
+        return entitySpawns;
+    }
+
+    public GenerationProperties getGenerationProperties() {
+        return generation;
+    }
+
 }

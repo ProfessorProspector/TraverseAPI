@@ -2,8 +2,9 @@
   "required": true,
   "package": "io.github.prospector.traverse.api.mixin",
   "compatibilityLevel": "JAVA_8",
-  "mixins": [ "BiomeGroupToBiomeLayerMixin" ],
+  "mixins": [
+  ],
   "injectors": {
-	"defaultRequire": 1
+    "defaultRequire": 1
   }
 }

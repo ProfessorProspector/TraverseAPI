@@ -8,25 +8,27 @@ import net.minecraft.world.gen.feature.OakTreeFeature;
 import java.util.function.Function;
 
 public class TraverseTreeFeature extends OakTreeFeature {
-	public boolean isWorldGen;
 
-	public TraverseTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean isWorldGen) {
-		super(function, !isWorldGen);
-		this.isWorldGen = isWorldGen;
-	}
+    public boolean worldGen;
 
-	public TraverseTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean isWorldGen, int minTreeHeight, BlockState logState, BlockState leavesState, boolean vinesGrow) {
-		super(function, !isWorldGen, minTreeHeight, logState, leavesState, vinesGrow);
-		this.isWorldGen = isWorldGen;
-	}
+    public TraverseTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean worldGen) {
+        super(function, !worldGen);
+        this.worldGen = worldGen;
+    }
 
-	public TraverseTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean isWorldGen, int minTreeHeight, BlockState logState, BlockState leavesState) {
-		super(function, !isWorldGen, minTreeHeight, logState, leavesState, false);
-		this.isWorldGen = isWorldGen;
-	}
+    public TraverseTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean worldGen, int minHeight, BlockState log, BlockState leaves, boolean vines) {
+        super(function, !worldGen, minHeight, log, leaves, vines);
+        this.worldGen = worldGen;
+    }
 
-	public TraverseTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean isWorldGen, BlockState logState, BlockState leavesState) {
-		super(function, !isWorldGen, 4, logState, leavesState, false);
-		this.isWorldGen = isWorldGen;
-	}
+    public TraverseTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean worldGen, int minHeight, BlockState log, BlockState leaves) {
+        super(function, !worldGen, minHeight, log, leaves, false);
+        this.worldGen = worldGen;
+    }
+
+    public TraverseTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean worldGen, BlockState log, BlockState leaves) {
+        super(function, !worldGen, 4, log, leaves, false);
+        this.worldGen = worldGen;
+    }
+
 }

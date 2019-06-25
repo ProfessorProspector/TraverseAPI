@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "traverse",
-  "name": "Traverse API",
+  "name": "Traverse",
   "version": "$version",
   "environment": "*",
   "license": "MIT",
@@ -16,7 +16,7 @@
 	"homepage": "https://minecraft.curseforge.com/projects/traverseapi",
 	"issues": "https://github.com/Prospector/TraverseAPI/issues"
   },
-  "requires": {
+  "depends": {
 	"fabric": "*"
   },
   "authors": [
